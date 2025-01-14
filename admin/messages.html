@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Admin Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo-dark-large.png" alt="Boelman Media">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="photo-sessions.html" class="nav-link">
+                    <i class="fas fa-camera"></i>
+                    <span>Photo Sessions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="blog-posts.html" class="nav-link">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog Posts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link active">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Messages</h1>
+            <div class="header-actions">
+                <button class="action-btn secondary" onclick="markAllRead()">
+                    <i class="fas fa-check-double"></i> Mark All Read
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Messages</button>
+            <button class="filter-tab" data-filter="unread">Unread</button>
+            <button class="filter-tab" data-filter="contact">Contact Form</button>
+            <button class="filter-tab" data-filter="booking">Booking Requests</button>
+        </div>
+
+        <div class="messages-container">
+            <div id="message-list" class="message-list">
+                <!-- Messages will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Message Modal -->
+        <div id="message-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h2 id="modal-subject"></h2>
+                        <div class="message-meta">
+                            <span id="modal-sender"></span>
+                            <span id="modal-date"></span>
+                        </div>
+                    </div>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div id="modal-content"></div>
+                <div class="message-actions">
+                    <button class="action-btn reply-btn" onclick="replyToMessage()">
+                        <i class="fas fa-reply"></i> Reply
+                    </button>
+                    <button class="action-btn delete-btn" onclick="deleteMessage()">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        if (localStorage.getItem('adminAuth') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        let currentFilter = 'all';
+        let currentMessageIndex = null;
+        let searchTimeout = null;
+
+        // Load messages from localStorage
+        function loadMessages(filter = 'all') {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const messageList = document.getElementById('message-list');
+            messageList.innerHTML = '';
+
+            let filteredMessages = messages;
+            
+            // Apply filter
+            filteredMessages = messages.filter(message => {
+                switch(filter) {
+                    case 'unread': return !message.read;
+                    case 'contact': return message.type === 'Contact Form';
+                    case 'booking': return message.type === 'Booking Request';
+                    default: return true;
+                }
+            });
+
+            if (filteredMessages.length === 0) {
+                messageList.innerHTML = `
+                    <div class="message-item">
+                        <div class="message-preview">
+                            No ${filter === 'all' ? '' : filter} messages found
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredMessages.forEach((message, index) => {
+                const messageEl = document.createElement('div');
+                messageEl.className = `message-item ${message.read ? '' : 'unread'}`;
+                messageEl.onclick = () => showMessage(index);
+                
+                messageEl.innerHTML = `
+                    <div class="message-header">
+                        <span class="message-sender">${message.name}</span>
+                        <span class="message-date">${formatDate(message.date)}</span>
+                    </div>
+                    <div class="message-subject">${message.subject || 'No Subject'}</div>
+                    <div class="message-preview">${message.message}</div>
+                    <div class="message-meta">
+                        <span class="message-type">
+                            <i class="fas fa-envelope"></i>
+                            ${message.type || 'Contact Form'}
+                        </span>
+                        <span class="message-email">
+                            <i class="fas fa-at"></i>
+                            ${message.email}
+                        </span>
+                        ${message.phone ? `
+                            <span class="message-phone">
+                                <i class="fas fa-phone"></i>
+                                ${message.phone}
+                            </span>
+                        ` : ''}
+                    </div>
+                `;
+                
+                messageList.appendChild(messageEl);
+            });
+        }
+
+        // Format date helper function
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            if (days === 0) {
+                return `Today, ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+            } else if (days === 1) {
+                return 'Yesterday';
+            } else if (days < 7) {
+                return date.toLocaleDateString('en-US', { weekday: 'long' });
+            } else {
+                return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric',
+                    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+                });
+            }
+        }
+
+        // Show message detail in modal
+        function showMessage(index) {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const message = messages[index];
+            if (!message) return;
+            
+            currentMessageIndex = index;
+            
+            document.getElementById('modal-subject').textContent = message.subject || 'No Subject';
+            document.getElementById('modal-sender').textContent = message.name;
+            document.getElementById('modal-date').textContent = new Date(message.date).toLocaleString();
+            document.getElementById('modal-content').innerHTML = `
+                <p>${message.message}</p>
+                <div class="message-meta">
+                    <p><strong>Email:</strong> ${message.email}</p>
+                    ${message.phone ? `<p><strong>Phone:</strong> ${message.phone}</p>` : ''}
+                    <p><strong>Type:</strong> ${message.type || 'Contact Form'}</p>
+                </div>
+            `;
+            
+            // Mark as read
+            if (!message.read) {
+                messages[index].read = true;
+                localStorage.setItem('contactMessages', JSON.stringify(messages));
+                updateDashboardCount();
+            }
+            
+            document.getElementById('message-modal').style.display = 'flex';
+            loadMessages(currentFilter); // Refresh list with current filter
+        }
+
+        function closeModal() {
+            document.getElementById('message-modal').style.display = 'none';
+        }
+
+        function updateDashboardCount() {
+            // Update count in dashboard if it exists
+            const dashboardCount = document.getElementById('unreadMessages');
+            if (dashboardCount) {
+                const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+                const unreadCount = messages.filter(m => !m.read).length;
+                dashboardCount.textContent = unreadCount;
+            }
+        }
+
+        function deleteMessage() {
+            if (confirm('Are you sure you want to delete this message?')) {
+                const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+                messages.splice(currentMessageIndex, 1);
+                localStorage.setItem('contactMessages', JSON.stringify(messages));
+                closeModal();
+                loadMessages(currentFilter);
+                updateDashboardCount();
+            }
+        }
+
+        // Add event listeners for filter buttons
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                loadMessages(currentFilter);
+            });
+        });
+
+        // Initialize event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial messages
+            loadMessages('all');
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('message-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Reply function
+        function replyToMessage() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const message = messages[currentMessageIndex];
+            
+            // Open default email client
+            window.location.href = `mailto:${message.email}?subject=Re: ${message.subject || 'Your Message'}&body=Dear ${message.name},\n\n`;
+        }
+
+        // Export functionality
+        function exportMessages() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const csvContent = [
+                ['Date', 'Name', 'Email', 'Phone', 'Type', 'Subject', 'Message', 'Status'],
+                ...messages.map(m => [
+                    new Date(m.date).toLocaleString(),
+                    m.name,
+                    m.email,
+                    m.phone || '',
+                    m.type || 'Contact Form',
+                    m.subject || '',
+                    m.message,
+                    m.read ? 'Read' : 'Unread'
+                ])
+            ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `messages-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showNotification('Messages exported successfully!', 'success');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function markAllRead() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const unreadCount = messages.filter(m => !m.read).length;
+            
+            if (unreadCount === 0) {
+                showNotification('No unread messages', 'info');
+                return;
+            }
+
+            messages.forEach(message => message.read = true);
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+            loadMessages(currentFilter);
+            updateDashboardCount();
+            showNotification(`Marked ${unreadCount} messages as read`, 'success');
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Blog Post | Admin Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo-dark-large.png" alt="Boelman Media">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="photo-sessions.html" class="nav-link">
+                    <i class="fas fa-camera"></i>
+                    <span>Photo Sessions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="blog-posts.html" class="nav-link active">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog Posts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="header-left">
+                <a href="blog-posts.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h1>New Blog Post</h1>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="previewPost()">
+                    <i class="fas fa-eye"></i> Preview
+                </button>
+                <button class="btn btn-secondary" onclick="saveDraft()">
+                    <i class="fas fa-save"></i> Save Draft
+                </button>
+                <button class="btn btn-primary" onclick="publishPost()">
+                    <i class="fas fa-paper-plane"></i> Publish
+                </button>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <div class="form-group">
+                <label for="post-title">Title</label>
+                <input type="text" id="post-title" class="form-control" placeholder="Enter post title">
+            </div>
+
+            <div class="form-group">
+                <label>Featured Image</label>
+                <div class="image-upload" onclick="document.getElementById('image-input').click()">
+                    <input type="file" id="image-input" hidden accept="image/*">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload featured image</p>
+                </div>
+                <img id="image-preview" class="image-preview">
+            </div>
+
+            <div class="meta-grid">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" class="form-control">
+                        <option value="">Select Category</option>
+                        <option value="tips">Photography Tips</option>
+                        <option value="guides">Guides</option>
+                        <option value="news">News</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control">
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Content</label>
+                <div id="editor" class="editor"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize rich text editor
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['link', 'image'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean'],
+                    [{ 'align': [] }],
+                    [{ 'color': [] }]
+                ]
+            },
+            placeholder: 'Write your blog post content here...',
+            formats: {
+                header: true,
+                bold: true,
+                italic: true,
+                underline: true,
+                strike: true,
+                link: true,
+                image: true,
+                list: true,
+                align: true,
+                color: true
+            }
+        });
+
+        // Image upload preview
+        document.getElementById('image-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('image-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Save draft function
+        function saveDraft() {
+            const post = {
+                title: document.getElementById('post-title').value,
+                content: quill.root.innerHTML,
+                category: document.getElementById('category').value,
+                status: 'draft',
+                date: new Date().toISOString(),
+                slug: createSlug(document.getElementById('post-title').value)
+            };
+            
+            // Save to localStorage
+            let drafts = JSON.parse(localStorage.getItem('blogDrafts') || '[]');
+            drafts.push(post);
+            localStorage.setItem('blogDrafts', JSON.stringify(drafts));
+            
+            alert('Draft saved successfully!');
+        }
+
+        // Publish function
+        function publishPost() {
+            const params = new URLSearchParams(window.location.search);
+            const isEdit = params.has('edit');
+
+            const post = {
+                title: document.getElementById('post-title').value,
+                content: quill.root.innerHTML,
+                category: document.getElementById('category').value,
+                status: 'published',
+                date: isEdit ? existingPosts.find(p => p.slug === params.get('edit')).date : new Date().toISOString(),
+                slug: isEdit ? params.get('edit') : createSlug(document.getElementById('post-title').value)
+            };
+
+            // Create the blog post HTML file
+            const blogHTML = generateBlogHTML(post);
+            
+            // Download the generated HTML file
+            downloadBlogFile(blogHTML, post.slug);
+            
+            // Update blog index
+            updateBlogIndex(post);
+            
+            // Redirect back to blog posts list
+            window.location.href = 'blog-posts.html';
+        }
+
+        // Helper function to create URL-friendly slug
+        function createSlug(title) {
+            return title.toLowerCase()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+
+        // Generate blog post HTML
+        function generateBlogHTML(post) {
+            return `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>${post.title} | Boelman Media</title>
+                <link rel="stylesheet" href="../../css/styles.css">
+                <link rel="stylesheet" href="../../css/blog.css">
+                <!-- Add your other meta tags and styles -->
+            </head>
+            <body>
+                <header>
+                    <!-- Your header content -->
+                </header>
+
+                <main class="blog-post">
+                    <article>
+                        <header class="post-header">
+                            <h1>${post.title}</h1>
+                            <div class="post-meta">
+                                <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric' 
+                                })}</time>
+                                <span class="category">${post.category}</span>
+                            </div>
+                        </header>
+
+                        <div class="post-content">
+                            ${post.content}
+                        </div>
+                    </article>
+                </main>
+
+                <footer>
+                    <!-- Your footer content -->
+                </footer>
+            </body>
+            </html>`;
+        }
+
+        // Download the generated HTML file
+        function downloadBlogFile(content, slug) {
+            const blob = new Blob([content], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${slug}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Update blog index
+        function updateBlogIndex(post) {
+            let blogIndex = JSON.parse(localStorage.getItem('blogIndex') || '[]');
+            blogIndex.push({
+                title: post.title,
+                slug: post.slug,
+                date: post.date,
+                category: post.category,
+                preview: quill.getText().slice(0, 150) + '...'
+            });
+            localStorage.setItem('blogIndex', JSON.stringify(blogIndex));
+        }
+
+        // Check authentication
+        if (localStorage.getItem('adminAuth') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        function previewPost() {
+            const post = {
+                title: document.getElementById('post-title').value,
+                content: quill.root.innerHTML,
+                category: document.getElementById('category').value,
+                date: new Date().toISOString()
+            };
+            
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write(generateBlogHTML(post));
+            previewWindow.document.close();
+        }
+
+        // Define your existing blog posts
+        const existingPosts = [
+            {
+                title: "Real Estate Photography Guide",
+                slug: "real-estate-photography-guide",
+                category: "guides",
+                content: ``, // We'll load this dynamically
+                date: "2024-03-15"
+            },
+            // Add more posts here
+        ];
+
+        // Function to load post content
+        async function loadPostContent(slug) {
+            try {
+                const response = await fetch(`../blog/posts/${slug}.html`);
+                const html = await response.text();
+                
+                // Extract content from the HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const content = doc.querySelector('.post-content').innerHTML;
+                
+                return content;
+            } catch (error) {
+                console.error('Error loading post:', error);
+                return '';
+            }
+        }
+
+        // Function to load a post into the editor
+        async function loadPost(slug) {
+            const post = existingPosts.find(p => p.slug === slug);
+            if (!post) return;
+
+            // Load the post content
+            const content = await loadPostContent(post.slug);
+
+            // Set the form values
+            document.getElementById('post-title').value = post.title;
+            document.getElementById('category').value = post.category;
+            quill.root.innerHTML = content;
+
+            // Update URL to show we're editing
+            window.history.pushState({}, '', `?edit=${post.slug}`);
+        }
+
+        // Check if we're editing an existing post
+        window.addEventListener('load', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const editSlug = params.get('edit');
+            
+            if (editSlug) {
+                await loadPost(editSlug);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Boelman Media</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo-dark-large.png" alt="Boelman Media">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="photo-sessions.html" class="nav-link">
+                    <i class="fas fa-camera"></i>
+                    <span>Photo Sessions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="blog-posts.html" class="nav-link">
+                    <i class="fas fa-blog"></i> Blog Posts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-envelope"></i> Messages
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <div class="header-actions">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Log Out
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Sessions</h3>
+                <div class="value" id="total-sessions">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Sessions This Month</h3>
+                <div class="value" id="sessions-this-month">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Bookings</h3>
+                <div class="value" id="pending-bookings">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>NEW MESSAGES</h3>
+                <div class="value" id="unreadMessages">0</div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="main-section">
+                <div class="card">
+                    <h2>Recent Messages</h2>
+                    <ul class="message-list">
+                        <!-- Messages will be loaded dynamically -->
+                    </ul>
+                    <button class="action-btn" onclick="window.location.href='messages.html'">View All Messages</button>
+                </div>
+
+                <div class="card">
+                    <h2>Upcoming Sessions</h2>
+                    <div class="task-list">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-calendar"></i> View Calendar
+                    </button>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="card">
+                    <h2>Quick Actions</h2>
+                    <button class="action-btn" style="width: 100%; margin-bottom: 1rem;" onclick="window.location.href='property-details.html'">
+                        <i class="fas fa-plus"></i> New Session
+                    </button>
+                    <button class="action-btn secondary" style="width: 100%; margin-bottom: 1rem;" onclick="window.location.href='blog-posts.html'">
+                        <i class="fas fa-pen"></i> Create Blog Post
+                    </button>
+                    <button class="action-btn secondary" style="width: 100%;" onclick="quickUploadGallery()">
+                        <i class="fas fa-upload"></i> Upload Gallery
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Helper function to get properties data
+        function getProperties() {
+            return JSON.parse(localStorage.getItem('properties') || '[]');
+        }
+
+        // Helper function to format date
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+            });
+        }
+
+        // Update dashboard stats
+        function updateDashboardStats() {
+            const properties = getProperties();
+            const now = new Date();
+            const thisMonth = now.getMonth();
+            const thisYear = now.getFullYear();
+
+            // Calculate stats
+            const totalSessions = properties.length;
+            const sessionsThisMonth = properties.filter(p => {
+                const sessionDate = new Date(p.sessionDate);
+                return sessionDate.getMonth() === thisMonth && 
+                       sessionDate.getFullYear() === thisYear;
+            }).length;
+
+            const pendingBookings = properties.filter(p => 
+                p.status.toLowerCase() === 'scheduled' || 
+                p.status.toLowerCase() === 'pending'
+            ).length;
+
+            // Update stats in the DOM
+            document.getElementById('total-sessions').textContent = totalSessions;
+            document.getElementById('sessions-this-month').textContent = sessionsThisMonth;
+            document.getElementById('pending-bookings').textContent = pendingBookings;
+        }
+
+        // Update upcoming sessions
+        function updateUpcomingSessions() {
+            const properties = getProperties();
+            const now = new Date();
+            
+            // Get upcoming sessions (sorted by date)
+            const upcomingSessions = properties
+                .filter(p => new Date(p.sessionDate) > now)
+                .sort((a, b) => new Date(a.sessionDate) - new Date(b.sessionDate))
+                .slice(0, 5); // Show only next 5 sessions
+
+            const container = document.querySelector('.task-list');
+            container.innerHTML = upcomingSessions.length ? '' : '<p>No upcoming sessions</p>';
+
+            upcomingSessions.forEach(session => {
+                const sessionDate = new Date(session.sessionDate);
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                li.innerHTML = `
+                    <div class="task-text">
+                        <strong>${session.address}, ${session.city}</strong><br>
+                        ${session.clientName}
+                    </div>
+                    <div class="task-date">
+                        ${formatDate(sessionDate)}
+                    </div>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        // Update recent activity
+        function updateRecentActivity() {
+            const properties = getProperties();
+            
+            // Get recent activities (last 5 modified properties)
+            const recentActivities = properties
+                .sort((a, b) => (b.lastModified || 0) - (a.lastModified || 0))
+                .slice(0, 5);
+
+            const container = document.querySelector('.activity-list');
+            container.innerHTML = recentActivities.length ? '' : '<p>No recent activity</p>';
+
+            recentActivities.forEach(activity => {
+                const li = document.createElement('li');
+                li.className = 'activity-item';
+                li.innerHTML = `
+                    <div class="activity-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-text">
+                            ${activity.status} session for ${activity.address}
+                        </div>
+                        <div class="activity-time">
+                            ${formatDate(activity.lastModified || activity.sessionDate)}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDashboardStats();
+            updateUpcomingSessions();
+            updateRecentActivity();
+        });
+
+        // Check authentication
+        if (localStorage.getItem('adminAuth') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            window.location.href = 'login.html';
+        }
+
+        // Update unread message count
+        function updateMessageCount() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const unreadCount = messages.filter(m => !m.read).length;
+            document.getElementById('unreadMessages').textContent = unreadCount;
+        }
+        
+        updateMessageCount();
+
+        // Load recent messages
+        function loadRecentMessages() {
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            const messageList = document.querySelector('.message-list');
+            messageList.innerHTML = '';
+
+            // Show only the 3 most recent messages
+            messages.slice(0, 3).forEach(message => {
+                const messageEl = document.createElement('li');
+                messageEl.className = 'message-item';
+                
+                const date = new Date(message.date);
+                const formattedDate = isToday(date) ? 
+                    `Today, ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}` : 
+                    date.toLocaleDateString();
+
+                messageEl.innerHTML = `
+                    <div class="message-header">
+                        <span class="message-name">${message.name}</span>
+                        <span class="message-date">${formattedDate}</span>
+                    </div>
+                    <div class="message-preview">
+                        ${message.message}
+                    </div>
+                `;
+                
+                messageList.appendChild(messageEl);
+            });
+
+            // If no messages, show a placeholder
+            if (messages.length === 0) {
+                messageList.innerHTML = '<li class="message-item">No messages yet</li>';
+            }
+        }
+
+        // Helper function to check if a date is today
+        function isToday(date) {
+            const today = new Date();
+            return date.getDate() === today.getDate() &&
+                   date.getMonth() === today.getMonth() &&
+                   date.getFullYear() === today.getFullYear();
+        }
+
+        // Load messages when page loads
+        loadRecentMessages();
+
+        // Update messages every minute
+        setInterval(loadRecentMessages, 60000);
+
+        // Quick Actions functions
+        function quickUploadGallery() {
+            // Get recent properties
+            const properties = getProperties();
+            if (properties.length === 0) {
+                showNotification('No properties found. Create a new session first.', 'warning');
+                return;
+            }
+
+            // Sort by most recent
+            const recentProperties = properties
+                .sort((a, b) => new Date(b.sessionDate) - new Date(a.sessionDate))
+                .slice(0, 5);
+
+            // Create a modal for property selection
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Select Property</h2>
+                        <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Choose a property to upload photos:</p>
+                        <div class="property-list">
+                            ${recentProperties.map(property => `
+                                <div class="property-item" onclick="editProperty('${property.id}')">
+                                    <div class="property-details">
+                                        <strong>${property.address}, ${property.city}</strong>
+                                        <span>${formatDate(property.sessionDate)}</span>
+                                    </div>
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        function editProperty(id) {
+            window.location.href = `property-details.html?id=${id}`;
+        }
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                  type === 'warning' ? 'exclamation-triangle' : 
+                                  type === 'error' ? 'exclamation-circle' : 
+                                  'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

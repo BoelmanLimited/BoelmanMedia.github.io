@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Pricing Guide | Boelman Media</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1d1d1f;
+            --secondary-color: #424245;
+            --accent-color: #0066FF;
+            --border-color: #d2d2d7;
+            --background-color: #ffffff;
+        }
+
+        body {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            color: var(--primary-color);
+            line-height: 1.4;
+            background-color: var(--background-color);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1em;
+            padding: 1em 0;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--secondary-color);
+        }
+
+        .section {
+            margin: 2em 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-bottom: 1em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        .package {
+            margin: 2em 0;
+            padding: 1.5em;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .package-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .package-price {
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+
+        .package-description {
+            color: var(--secondary-color);
+            margin-bottom: 1em;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .add-ons {
+            margin: 2em 0;
+        }
+
+        .add-on {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8em 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .add-on:last-child {
+            border-bottom: none;
+        }
+
+        .add-on-name {
+            font-weight: 500;
+        }
+
+        .add-on-price {
+            color: var(--secondary-color);
+        }
+
+        .note {
+            background-color: #f5f5f7;
+            padding: 1em;
+            border-radius: 8px;
+            margin: 2em 0;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        .footer {
+            margin-top: 4em;
+            text-align: center;
+            padding-top: 2em;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        .footer p {
+            margin: 0.5em 0;
+        }
+
+        @media print {
+            body {
+                padding: 0.5in;
+            }
+            
+            .package {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="../../assets/images/logo-dark-large.png" alt="Boelman Media">
+    </div>
+
+    <div class="header">
+        <h1>Photography Pricing Guide</h1>
+        <h2>Professional Real Estate Photography Packages & Services</h2>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">STANDARD PACKAGES</h3>
+        
+        <div class="package">
+            <div class="package-header">
+                <div class="package-name">Essential Package</div>
+                <div class="package-price">$199</div>
+            </div>
+            <p class="package-description">Perfect for homes up to 2,000 sq ft</p>
+            <ul class="features">
+                <li>25-30 HDR Photos</li>
+                <li>Professional Editing</li>
+                <li>Next Day Delivery</li>
+                <li>Online Gallery</li>
+                <li>Full Resolution Downloads</li>
+                <li>Commercial Usage Rights</li>
+            </ul>
+        </div>
+
+        <div class="package">
+            <div class="package-header">
+                <div class="package-name">Premium Package</div>
+                <div class="package-price">$299</div>
+            </div>
+            <p class="package-description">Ideal for homes 2,000-3,500 sq ft</p>
+            <ul class="features">
+                <li>35-40 HDR Photos</li>
+                <li>Professional Editing</li>
+                <li>Next Day Delivery</li>
+                <li>Online Gallery</li>
+                <li>Full Resolution Downloads</li>
+                <li>Commercial Usage Rights</li>
+                <li>Aerial Photos (5 images)</li>
+                <li>Social Media Optimized Images</li>
+            </ul>
+        </div>
+
+        <div class="package">
+            <div class="package-header">
+                <div class="package-name">Luxury Package</div>
+                <div class="package-price">$399</div>
+            </div>
+            <p class="package-description">Perfect for luxury homes 3,500+ sq ft</p>
+            <ul class="features">
+                <li>45-50 HDR Photos</li>
+                <li>Professional Editing</li>
+                <li>Next Day Delivery</li>
+                <li>Online Gallery</li>
+                <li>Full Resolution Downloads</li>
+                <li>Commercial Usage Rights</li>
+                <li>Aerial Photos (10 images)</li>
+                <li>Twilight Photos</li>
+                <li>Social Media Optimized Images</li>
+                <li>Virtual Tour</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">ADD-ON SERVICES</h3>
+        <div class="add-ons">
+            <div class="add-on">
+                <div class="add-on-name">Aerial Photography (5 images)</div>
+                <div class="add-on-price">$99</div>
+            </div>
+            <div class="add-on">
+                <div class="add-on-name">Twilight Photos (5 images)</div>
+                <div class="add-on-price">$149</div>
+            </div>
+            <div class="add-on">
+                <div class="add-on-name">Virtual Tour</div>
+                <div class="add-on-price">$99</div>
+            </div>
+            <div class="add-on">
+                <div class="add-on-name">Video Tour</div>
+                <div class="add-on-price">$199</div>
+            </div>
+            <div class="add-on">
+                <div class="add-on-name">Floor Plan</div>
+                <div class="add-on-price">$99</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> All packages include professional editing, color correction, and sky replacement when needed. Prices may vary for properties outside our standard service area.
+    </div>
+
+    <div class="footer">
+        <p><strong>Boelman Media</strong></p>
+        <p>Professional Real Estate Photography & Media Services</p>
+        <p>Des Moines & Central Iowa</p>
+        <p>boelmanmedia.com</p>
+        <p>&copy; 2024 Boelman Media. All rights reserved.</p>
+    </div>
+</body>
+</html> 

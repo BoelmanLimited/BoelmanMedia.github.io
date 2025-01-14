@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | Admin Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <script src="/assets/js/property-website.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="js/gallery-manager.js" defer></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo-dark-large.png" alt="Boelman Media">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="photo-sessions.html" class="nav-link active">
+                    <i class="fas fa-camera"></i>
+                    <span>Photo Sessions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="blog-posts.html" class="nav-link">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog Posts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="header-left">
+                <a href="photo-sessions.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Sessions
+                </a>
+                <h1>Property Details</h1>
+            </div>
+            <div class="header-actions">
+                <button class="action-btn secondary" onclick="generateInvoice()">
+                    <i class="fas fa-file-invoice"></i> Generate Invoice
+                </button>
+                <button class="action-btn primary" onclick="saveChanges()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+
+        <div class="property-grid">
+            <!-- Left Column -->
+            <div class="property-column">
+                <!-- Basic Property Info -->
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-home"></i>
+                        <h2>Property Information</h2>
+                    </div>
+                    <input type="hidden" name="property-id" value="">
+                    <div class="form-group">
+                        <label>Property Title</label>
+                        <input type="text" id="property-title" class="form-control" placeholder="Enter a catchy title">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="property-address" class="form-control" placeholder="Property address">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="property-city" class="form-control" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label>Property Type</label>
+                        <select id="property-type" class="form-control">
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="land">Land</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Property Details -->
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h2>Property Details</h2>
+                    </div>
+                    <div class="form-group">
+                        <label>Square Footage</label>
+                        <input type="number" id="square-footage" class="form-control" placeholder="Square footage">
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" id="property-price" class="form-control" placeholder="Property price">
+                    </div>
+                    <div class="form-group">
+                        <label>Bedrooms</label>
+                        <input type="number" id="property-bedrooms" class="form-control" placeholder="Number of bedrooms">
+                    </div>
+                    <div class="form-group">
+                        <label>Bathrooms</label>
+                        <input type="number" id="property-bathrooms" class="form-control" placeholder="Number of bathrooms">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="property-column">
+                <!-- Description and Features -->
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-list"></i>
+                        <h2>Description & Features</h2>
+                    </div>
+                    <div class="form-group">
+                        <label>Property Description</label>
+                        <textarea id="property-description" class="form-control" rows="4" 
+                            placeholder="Enter a detailed description of the property"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Features (one per line)</label>
+                        <textarea id="property-features" class="form-control" rows="4" 
+                            placeholder="Enter property features, one per line"></textarea>
+                    </div>
+                    <div class="website-actions">
+                        <button class="action-btn secondary" onclick="previewWebsite()">
+                            <i class="fas fa-search"></i> Preview Website
+                        </button>
+                        <button class="action-btn primary" onclick="createPropertyWebsite()">
+                            <i class="fas fa-globe"></i> Create Property Website
+                        </button>
+                        <button class="action-btn secondary" onclick="viewPropertyWebsite()" disabled>
+                            <i class="fas fa-eye"></i> View Website
+                        </button>
+                        <button class="action-btn secondary" onclick="copyWebsiteLink()" disabled>
+                            <i class="fas fa-link"></i> Copy Link
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Session Details -->
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-camera"></i>
+                        <h2>Session Details</h2>
+                    </div>
+                    <div class="form-group">
+                        <label>Session Date</label>
+                        <input type="datetime-local" id="session-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Package Type</label>
+                        <select id="package-type" class="form-control">
+                            <option value="standard">Standard Package</option>
+                            <option value="premium">Premium Package</option>
+                            <option value="twilight">Twilight Package</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="session-status" class="form-control">
+                            <option value="scheduled">Scheduled</option>
+                            <option value="completed">Completed</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Width Column -->
+            <div class="property-column full-width">
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-user"></i>
+                        <h2>Client Information</h2>
+                    </div>
+                    <div class="form-group">
+                        <label>Client Name</label>
+                        <input type="text" id="client-name" class="form-control" placeholder="Client name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="client-phone" class="form-control" placeholder="Phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="client-email" class="form-control" placeholder="Email address">
+                    </div>
+                </div>
+
+                <!-- Gallery Section -->
+                <div class="property-card">
+                    <div class="settings-header">
+                        <i class="fas fa-images"></i>
+                        <h2>Photo Gallery</h2>
+                    </div>
+                    <div class="gallery-upload-container">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="photoUpload" multiple accept="image/*" style="display: none;">
+                            <button class="action-btn primary" onclick="document.getElementById('photoUpload').click()">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload Photos
+                            </button>
+                            <div class="upload-info">
+                                <p>Drag & drop photos here or click to select</p>
+                                <p class="upload-hint">Supported formats: JPG, PNG (max 20MB each)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-container">
+                        <div class="gallery-tools">
+                            <button class="action-btn secondary" onclick="selectAllPhotos()">
+                                <i class="fas fa-check-square"></i> Select All
+                            </button>
+                            <button class="action-btn danger" onclick="deleteSelectedPhotos()">
+                                <i class="fas fa-trash"></i> Delete Selected
+                            </button>
+                        </div>
+                        <div class="gallery-grid sortable" id="propertyGallery">
+                            <!-- Gallery images will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Website Preview Modal -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content preview-content">
+            <div class="modal-header">
+                <h2>Website Preview</h2>
+                <button onclick="closePreview()" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-frame-container">
+                    <iframe id="preview-frame"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn secondary" onclick="closePreview()">Close</button>
+                <button class="action-btn primary" onclick="createFromPreview()">Create Website</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize currentGallery
+        let currentGallery = [];
+
+        // Get property ID from URL on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+            if (propertyId) {
+                loadPropertyDetails(propertyId);
+            } else {
+                // If no ID, this is a new property
+                document.querySelector('[name="property-id"]').value = Date.now().toString();
+                updateWebsiteButtons();
+            }
+        });
+
+        function loadPropertyDetails(id) {
+            const properties = JSON.parse(localStorage.getItem('properties') || '[]');
+            const property = properties.find(p => p.id === id);
+            
+            if (property) {
+                document.querySelector('[name="property-id"]').value = property.id;
+                document.getElementById('property-title').value = property.title || '';
+                document.getElementById('property-address').value = property.address || '';
+                document.getElementById('property-city').value = property.city;
+                document.getElementById('property-type').value = property.type;
+                document.getElementById('square-footage').value = property.squareFootage;
+                document.getElementById('session-date').value = property.sessionDate;
+                document.getElementById('package-type').value = property.package;
+                document.getElementById('session-status').value = property.status;
+                document.getElementById('client-name').value = property.clientName;
+                document.getElementById('client-phone').value = property.clientPhone;
+                document.getElementById('client-email').value = property.clientEmail;
+                
+                // Load gallery
+                if (property.gallery) {
+                    loadGallery(property.gallery);
+                }
+            }
+        }
+
+        function saveChanges() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            if (!propertyId) {
+                showNotification('Error: No property ID found', 'error');
+                return;
+            }
+
+            try {
+                const propertyData = {
+                    id: propertyId,
+                    title: document.getElementById('property-title').value.trim(),
+                    address: document.getElementById('property-address').value.trim(),
+                    city: document.getElementById('property-city').value.trim(),
+                    type: document.getElementById('property-type').value,
+                    price: document.getElementById('property-price').value,
+                    bedrooms: document.getElementById('property-bedrooms').value,
+                    bathrooms: document.getElementById('property-bathrooms').value,
+                    squareFootage: document.getElementById('square-footage').value,
+                    description: document.getElementById('property-description').value.trim(),
+                    features: document.getElementById('property-features').value
+                        .split('\n')
+                        .filter(feature => feature.trim()),
+                    sessionDate: document.getElementById('session-date').value,
+                    package: document.getElementById('package-type').value,
+                    status: document.getElementById('session-status').value,
+                    clientName: document.getElementById('client-name').value.trim(),
+                    clientPhone: document.getElementById('client-phone').value.trim(),
+                    clientEmail: document.getElementById('client-email').value.trim(),
+                    gallery: currentGallery || [],
+                    lastModified: Date.now()
+                };
+
+                // Save to properties storage
+                let properties = JSON.parse(localStorage.getItem('properties') || '[]');
+                
+                const index = properties.findIndex(p => p.id === propertyId);
+                if (index !== -1) {
+                    properties[index] = propertyData;
+                } else {
+                    properties.push(propertyData);
+                }
+
+                localStorage.setItem('properties', JSON.stringify(properties));
+                showNotification('Property details saved successfully', 'success');
+                
+                return true; // Indicate successful save
+
+            } catch (error) {
+                console.error('Error saving property:', error);
+                showNotification('Error saving property details', 'error');
+                return false; // Indicate failed save
+            }
+        }
+
+        function generateInvoice() {
+            // Implement invoice generation
+            showNotification('Invoice generation coming soon', 'info');
+        }
+
+        function showNotification(message, type = 'success', duration = 3000) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                  type === 'error' ? 'exclamation-circle' :
+                                  type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                <span style="white-space: pre-line">${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            // Return the notification element if duration is 0 (for progress notifications)
+            if (duration === 0) {
+                return notification;
+            }
+
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, duration);
+        }
+
+        // Function to generate a URL-friendly slug
+        function generateSlug(text) {
+            return text
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+        }
+
+        async function viewPropertyWebsite() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            
+            if (!propertyId) {
+                showNotification('No property selected', 'warning');
+                return;
+            }
+
+            if (!PropertyWebsite.exists(propertyId)) {
+                showNotification('Please create a website first', 'warning');
+                return;
+            }
+
+            try {
+                const url = window.location.origin + PropertyWebsite.getUrl(propertyId);
+                window.open(url, '_blank');
+            } catch (error) {
+                console.error('Error viewing property website:', error);
+                showNotification('Error viewing property website', 'error');
+            }
+        }
+
+        async function copyWebsiteLink() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            try {
+                const url = window.location.origin + PropertyWebsite.getUrl(propertyId);
+                await navigator.clipboard.writeText(url);
+                showNotification('Website link copied to clipboard', 'success');
+            } catch (error) {
+                showNotification('Error copying link', 'error');
+            }
+        }
+
+        function updateWebsiteButtons() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            const hasWebsite = PropertyWebsite.exists(propertyId);
+            
+            document.querySelector('.website-actions .action-btn:nth-child(2)').disabled = !hasWebsite;
+            document.querySelector('.website-actions .action-btn:nth-child(3)').disabled = !hasWebsite;
+        }
+
+        async function createPropertyWebsite() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            
+            if (!propertyId) {
+                showNotification('No property selected', 'warning');
+                return;
+            }
+
+            if (!saveChanges()) {
+                showNotification('Please save property details first', 'warning');
+                return;
+            }
+
+            const properties = JSON.parse(localStorage.getItem('properties') || '[]');
+            const property = properties.find(p => p.id === propertyId);
+
+            if (!property) {
+                showNotification('Property not found', 'error');
+                return;
+            }
+
+            showNotification('Creating property website...', 'info');
+
+            try {
+                if (await PropertyWebsite.create(property)) {
+                    showNotification('Property website created successfully', 'success');
+                    updateWebsiteButtons();
+                    
+                    // Ask if user wants to view the website
+                    if (confirm('Website created! Would you like to view it now?')) {
+                        viewPropertyWebsite();
+                    }
+                } else {
+                    showNotification('Error creating property website', 'error');
+                }
+            } catch (error) {
+                console.error('Website creation error:', error);
+                showNotification('Error creating property website', 'error');
+            }
+        }
+
+        // Update loadPropertyDetails to set initial button states
+        const originalLoadPropertyDetails = loadPropertyDetails;
+        loadPropertyDetails = function(id) {
+            originalLoadPropertyDetails(id);
+            updateWebsiteButtons();
+        };
+
+        function previewWebsite() {
+            const propertyId = document.querySelector('[name="property-id"]').value;
+            
+            // Save current data first
+            if (!saveChanges()) {
+                showNotification('Please save property details first', 'warning');
+                return;
+            }
+
+            const properties = JSON.parse(localStorage.getItem('properties') || '[]');
+            const property = properties.find(p => p.id === propertyId);
+
+            if (!property) {
+                showNotification('Property not found', 'error');
+                return;
+            }
+
+            PropertyWebsite.preview(property);
+        }
+
+        function closePreview() {
+            document.getElementById('preview-modal').style.display = 'none';
+        }
+
+        function createFromPreview() {
+            closePreview();
+            createPropertyWebsite();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('preview-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePreview();
+            }
+        });
+
+        // Initialize gallery manager after DOM is loaded
+        let galleryManager;
+        document.addEventListener('DOMContentLoaded', function() {
+            galleryManager = new GalleryManager('propertyGallery');
+        });
+
+        function loadGallery(photos) {
+            if (galleryManager) {
+                galleryManager.loadGallery(photos);
+            }
+        }
+    </script>
+</body>
+</html> 

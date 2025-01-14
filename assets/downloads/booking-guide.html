@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Guide | Boelman Media</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1d1d1f;
+            --secondary-color: #424245;
+            --accent-color: #0066FF;
+            --border-color: #d2d2d7;
+            --background-color: #ffffff;
+        }
+
+        body {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            color: var(--primary-color);
+            line-height: 1.4;
+            background-color: var(--background-color);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1em;
+            padding: 1em 0;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--secondary-color);
+            margin-bottom: 0.5em;
+        }
+
+        .section {
+            margin: 2em 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-bottom: 1em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        .step {
+            margin: 1.5em 0;
+            padding-left: 1em;
+        }
+
+        .step-number {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5em;
+        }
+
+        .step-content {
+            margin-left: 1em;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 1em 0;
+            padding-left: 1em;
+        }
+
+        li {
+            margin: 0.5em 0;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: -1em;
+        }
+
+        .note {
+            background-color: #f5f5f7;
+            padding: 1em;
+            border-radius: 8px;
+            margin: 1em 0;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        .footer {
+            margin-top: 4em;
+            text-align: center;
+            padding-top: 2em;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-color);
+            page-break-inside: avoid;
+        }
+
+        .footer p {
+            margin: 0.5em 0;
+        }
+
+        @media print {
+            body {
+                padding: 0.5in;
+            }
+            
+            .no-break {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="../../assets/images/logo-dark-large.png" alt="Boelman Media">
+    </div>
+
+    <div class="header">
+        <h1>Booking Guide</h1>
+        <h2>How to Schedule Your Professional Real Estate Photography Session</h2>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">BEFORE BOOKING</h3>
+        <div class="step">
+            <div class="step-number">1. Property Preparation</div>
+            <div class="step-content">
+                <p>Ensure the property will be ready for photography:</p>
+                <ul>
+                    <li>Property is clean and staged</li>
+                    <li>All maintenance and repairs are complete</li>
+                    <li>Landscaping is finished</li>
+                    <li>Download our Pre-Shoot Checklist for detailed preparation steps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">BOOKING PROCESS</h3>
+        <div class="step">
+            <div class="step-number">2. Schedule Your Session</div>
+            <div class="step-content">
+                <p>Choose your preferred booking method:</p>
+                <ul>
+                    <li>Online booking through our website</li>
+                    <li>Phone: (515) XXX-XXXX</li>
+                    <li>Email: contact@boelmanmedia.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3. Select Your Package</div>
+            <div class="step-content">
+                <p>Choose the services you need:</p>
+                <ul>
+                    <li>Standard Photo Package</li>
+                    <li>Twilight Photography</li>
+                    <li>Aerial Photography</li>
+                    <li>Virtual Tours</li>
+                    <li>Video Tours</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">4. Provide Property Details</div>
+            <div class="step-content">
+                <ul>
+                    <li>Property address</li>
+                    <li>Square footage</li>
+                    <li>Number of rooms</li>
+                    <li>Special features to highlight</li>
+                    <li>Access instructions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">WHAT TO EXPECT</h3>
+        <div class="step">
+            <div class="step-number">5. Day of Photography</div>
+            <div class="step-content">
+                <ul>
+                    <li>We arrive at the scheduled time</li>
+                    <li>Session typically takes 1-2 hours</li>
+                    <li>We photograph all requested areas</li>
+                    <li>Property should be photo-ready upon arrival</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">6. Delivery & Review</div>
+            <div class="step-content">
+                <ul>
+                    <li>Photos delivered within 24 hours</li>
+                    <li>Online gallery for easy access</li>
+                    <li>Free touch-ups if needed</li>
+                    <li>Download in high resolution</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> For twilight sessions, flexible scheduling may be required based on sunset times and weather conditions.
+    </div>
+
+    <div class="footer">
+        <p><strong>Boelman Media</strong></p>
+        <p>Professional Real Estate Photography & Media Services</p>
+        <p>Des Moines & Central Iowa</p>
+        <p>boelmanmedia.com</p>
+        <p>&copy; 2024 Boelman Media. All rights reserved.</p>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homeowner FAQ | Boelman Media</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1d1d1f;
+            --secondary-color: #424245;
+            --accent-color: #0066FF;
+            --border-color: #d2d2d7;
+            --background-color: #ffffff;
+        }
+
+        body {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            color: var(--primary-color);
+            line-height: 1.4;
+            background-color: var(--background-color);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1em;
+            padding: 1em 0;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--secondary-color);
+        }
+
+        .section {
+            margin: 2em 0;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-bottom: 1em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        .faq-item {
+            margin: 1.5em 0;
+            padding-left: 1em;
+        }
+
+        .question {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5em;
+        }
+
+        .answer {
+            color: var(--secondary-color);
+            padding-left: 1em;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .answer p {
+            margin-bottom: 0.5em;
+        }
+
+        .answer ul {
+            list-style-type: none;
+            margin: 0.5em 0;
+            padding-left: 1em;
+        }
+
+        .answer li {
+            margin: 0.3em 0;
+            padding-left: 1em;
+            position: relative;
+        }
+
+        .answer li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .tip {
+            background-color: #f5f5f7;
+            padding: 1em;
+            border-radius: 8px;
+            margin: 1em 0;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        .footer {
+            margin-top: 4em;
+            text-align: center;
+            padding-top: 2em;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        .footer p {
+            margin: 0.5em 0;
+        }
+
+        @media print {
+            body {
+                padding: 0.5in;
+            }
+            
+            .section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="../../assets/images/logo-dark-large.png" alt="Boelman Media">
+    </div>
+
+    <div class="header">
+        <h1>Frequently Asked Questions</h1>
+        <h2>Everything You Need to Know About Real Estate Photography</h2>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">BEFORE THE SHOOT</h3>
+        
+        <div class="faq-item">
+            <div class="question">How long should I plan for the photo session?</div>
+            <div class="answer">
+                <p>A typical photo session takes 1-2 hours, depending on your home's size. Larger homes or additional services like twilight photos or video may require more time.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Do I need to be present during the shoot?</div>
+            <div class="answer">
+                <p>While not required, it's helpful to be available at the start of the session to:</p>
+                <ul>
+                    <li>Provide access to all areas</li>
+                    <li>Point out special features</li>
+                    <li>Address any last-minute concerns</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">What if it's raining on photo day?</div>
+            <div class="answer">
+                <p>We monitor weather conditions and will contact you if rescheduling is recommended. Exterior photos are best taken on dry days with good lighting conditions.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">DURING THE SHOOT</h3>
+        
+        <div class="faq-item">
+            <div class="question">Should I leave lights on or off?</div>
+            <div class="answer">
+                <p>Please turn ON all interior lights, including:</p>
+                <ul>
+                    <li>Ceiling lights and lamps</li>
+                    <li>Under-cabinet lighting</li>
+                    <li>Accent lighting</li>
+                </ul>
+                <p>We'll adjust as needed during the shoot.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">What about pets during the photo session?</div>
+            <div class="answer">
+                <p>We recommend securing pets in a garage, basement, or off-site during the shoot. This ensures their safety and prevents them from appearing in photos.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Can you photograph specific features or angles?</div>
+            <div class="answer">
+                <p>Absolutely! Let us know about any special features or preferred angles at the start of the session. We aim to highlight your home's best attributes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">AFTER THE SHOOT</h3>
+        
+        <div class="faq-item">
+            <div class="question">When will I receive my photos?</div>
+            <div class="answer">
+                <p>You'll receive your professionally edited photos within 24 hours through our online gallery system. Rush delivery is available upon request.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">What if I need revisions?</div>
+            <div class="answer">
+                <p>We offer complimentary basic revisions within 48 hours of delivery. Simply let us know what adjustments you need, and we'll take care of it promptly.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">How do I download and share the photos?</div>
+            <div class="answer">
+                <p>Your online gallery includes options to:</p>
+                <ul>
+                    <li>Download individual photos</li>
+                    <li>Download the entire gallery</li>
+                    <li>Share directly to social media</li>
+                    <li>Share via email link</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip">
+        <strong>Pro Tip:</strong> For the best results, review our Pre-Shoot Checklist and Home Staging Guide before your session. Well-prepared homes photograph beautifully and typically sell faster!
+    </div>
+
+    <div class="footer">
+        <p><strong>Boelman Media</strong></p>
+        <p>Professional Real Estate Photography & Media Services</p>
+        <p>Des Moines & Central Iowa</p>
+        <p>boelmanmedia.com</p>
+        <p>&copy; 2024 Boelman Media. All rights reserved.</p>
+    </div>
+</body>
+</html> 

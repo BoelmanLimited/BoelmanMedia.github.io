@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Boelman Media</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f7;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1d1d1f;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1d1d1f;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0066FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0055dd;
+        }
+
+        .error {
+            color: #ff3b30;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="../assets/images/logo-dark-large.png" alt="Boelman Media">
+        </div>
+        <h1>Admin Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Log In</button>
+            <div id="error" class="error">Invalid username or password</div>
+        </form>
+    </div>
+
+    <script>
+        // Hash function for basic security
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Store admin credentials (in production, this should be server-side)
+        const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // 'admin' hashed
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('error');
+            
+            // Hash the input password
+            const hashedPassword = await hashPassword(password);
+            
+            // Check credentials
+            if (username === 'admin' && hashedPassword === ADMIN_HASH) {
+                // Store authentication in localStorage
+                localStorage.setItem('adminAuth', 'true');
+                // Redirect to admin dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                error.style.display = 'block';
+            }
+        });
+
+        // Check if already logged in
+        if (localStorage.getItem('adminAuth') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html> 
