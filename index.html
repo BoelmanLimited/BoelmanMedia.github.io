@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boelman Media | Real Estate Photography & Media</title>
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -28,7 +29,6 @@
                 </li>
                 <li><a class="link-styled" href="#services">Services</a></li>
                 <li><a class="link-styled" href="#portfolio">Portfolio</a></li>
-                <li><a class="link-styled" href="#pricing">Pricing</a></li>
                 <li><a class="link-styled" href="#resources">Resources</a></li>
                 <li><a class="link-styled" href="#contact">Contact</a></li>
             </ul>
@@ -39,14 +39,14 @@
     <section class="home-hero reveal-fade">
         <div class="hero-background">
             <img class="hero-bg-image" 
-                 src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=3000" 
+                 src="https://en.idei.club/uploads/posts/2023-06/1687792327_en-idei-club-p-luxury-swimming-pool-dizain-instagram-2.jpg" 
                  alt="Luxury Real Estate">
         </div>
         <div class="home-hero-content">
-            <h1 class="title">Professional Real Estate Media</h1>
+            <h1 class="title">Central Iowa's Premiere Real Estate Media</h1>
             <h2 class="subtitle">Elevate Your Listings with Premium Photography & Media Services</h2>
             <div class="cta-links">
-                <a href="#contact" class="link-styled">Book Now ></a>
+                <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="link-styled" target="_blank">Book Now ></a>
                 <a href="#portfolio" class="link-styled">View Portfolio ></a>
             </div>
         </div>
@@ -159,7 +159,7 @@
         <div class="meet-container">
             <div class="meet-content">
                 <div class="meet-image">
-                    <img data-src="https://images.unsplash.com/photo-1556157382-97eda2d62296" alt="Andrew Boelman" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+                    <img data-src="../../assets/images/andrew-new.jpg" alt="Andrew Boelman" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
                 </div>
                 <div class="meet-text">
                     <p class="meet-intro">Hi, I'm Andrew Boelman, a professional real estate photographer based in Central Iowa.</p>
@@ -334,20 +334,6 @@
         </div>
     </section>
 
-    <!-- Blog Preview Section -->
-    <section id="blog-preview" class="blog-preview-section reveal-slide-up">
-        <h2 class="section-title">Latest Articles</h2>
-        <div class="blog-preview-grid">
-            <!-- Blog previews will be populated by JavaScript -->
-        </div>
-        <div class="section-footer">
-            <a href="blog/index.html" class="apple-button">
-                View All Articles
-                <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="contact-section reveal-rotate">
         <h2 class="section-title">Get in Touch</h2>
@@ -385,7 +371,7 @@
                 <ul>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#resources">Resources</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -412,11 +398,6 @@
     </footer>
 
     <div class="scroll-progress"></div>
-
-    <button class="floating-contact">
-        <i class="fas fa-comment"></i>
-        <span>Let's Talk</span>
-    </button>
 
     <div class="noise-overlay"></div>
 
@@ -448,6 +429,47 @@
             // Show success message
             alert('Message sent successfully!');
         }
+    </script>
+
+    <style>
+    .scroll-top-btn {
+        background-color: var(--accent-color, #0066FF);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: opacity 0.3s;
+    }
+
+    .scroll-top-btn.visible {
+        display: block;
+    }
+    </style>
+
+    <script>
+    const scrollBtn = document.querySelector('#scrollToTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
     </script>
 </body>
 </html> 
