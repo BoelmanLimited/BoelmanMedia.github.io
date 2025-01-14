@@ -87,10 +87,12 @@
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s ease;
+    cursor: pointer;
 }
 
 .admin-link:hover {
     color: white;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {
