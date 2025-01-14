@@ -33,10 +33,10 @@
     <!-- Enhanced Hero Section -->
     <section class="hero-section reveal-fade">
         <div class="hero-content">
-            <h1 class="title">Real Estate Videography</h1>
-            <p class="subtitle">Cinematic property tours that tell your story</p>
+            <h1 class="title" style="color: var(--primary-color);">Real Estate Videography</h1>
+            <p class="subtitle" style="color: var(--secondary-color);">Cinematic property tours that tell your story</p>
             <div class="cta-links">
-                <a href="#pricing" class="link-styled">View Pricing ></a>
+                <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="link-styled" target="_blank">Book Now ></a>
                 <a href="#contact" class="link-styled">Contact Us ></a>
             </div>
         </div>
@@ -53,15 +53,6 @@
             <h2 class="section-title">Why Choose Professional Videography</h2>
             <p class="section-subtitle">Stand out with cinematic property videos</p>
             <div class="features-layout">
-                <div class="feature-highlight reveal-scale">
-                    <img src="https://images.unsplash.com/photo-1494526585095-c41746248156" 
-                         alt="Professional Videography" 
-                         loading="lazy">
-                    <div class="highlight-content">
-                        <h3>Cinematic Quality</h3>
-                        <p>Professional videography brings your property to life with stunning 4K footage, smooth camera movements, and expert editing.</p>
-                    </div>
-                </div>
                 <div class="features-grid">
                     <div class="feature-item reveal-slide-right" style="--delay: 0.2s">
                         <div class="feature-icon">
@@ -110,56 +101,110 @@
         </div>
     </section>
 
-    <!-- Enhanced Pricing Section -->
-    <section id="pricing" class="pricing-section reveal-scale">
+    <!-- Packages Section -->
+    <section class="pricing-section reveal-scale">
         <div class="section-content">
             <h2 class="section-title">Video Packages</h2>
-            <p class="section-subtitle">Choose the perfect package for your property</p>
+            <p class="section-subtitle">Cinematic video solutions for every marketing need</p>
             <div class="pricing-plans">
+                <style>
+                .pricing-cards {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+                
+                .pricing-card {
+                    min-width: 250px;
+                }
+                
+                @media (max-width: 1200px) {
+                    .pricing-cards {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .pricing-cards {
+                        grid-template-columns: 1fr;
+                        max-width: 400px;
+                    }
+                }
+                </style>
                 <div class="pricing-cards">
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>Basic Video</h3>
-                            <p class="price">$499</p>
+                            <h3>Social Media Reel</h3>
+                            <p class="price">$125</p>
                         </div>
                         <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 60-90 second property tour</li>
+                            <li><i class="fas fa-check"></i> Instagram/TikTok Optimized</li>
+                            <li><i class="fas fa-check"></i> Vertical Format (9:16)</li>
+                            <li><i class="fas fa-check"></i> Property Walkthrough</li>
                             <li><i class="fas fa-check"></i> 4K resolution</li>
-                            <li><i class="fas fa-check"></i> Licensed music</li>
-                            <li><i class="fas fa-check"></i> Basic color grading</li>
+                            <li><i class="fas fa-check"></i> Trending Music Options</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button">Book Now</a>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button" target="_blank">Book Now</a>
                     </div>
                     <div class="pricing-card featured">
                         <div class="pricing-header">
                             <span class="featured-label">Most Popular</span>
-                            <h3>Premium Video</h3>
-                            <p class="price">$799</p>
+                            <h3>60-Second Video</h3>
+                            <p class="price">$250</p>
                         </div>
                         <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 90-120 second cinematic tour</li>
+                            <li><i class="fas fa-check"></i> 60-Second Cinematic Tour</li>
                             <li><i class="fas fa-check"></i> 4K resolution</li>
-                            <li><i class="fas fa-check"></i> Drone footage included</li>
+                            <li><i class="fas fa-check"></i> Aerial Drone Shots</li>
+                            <li><i class="fas fa-check"></i> Smooth Gimbal Footage</li>
                             <li><i class="fas fa-check"></i> Professional color grading</li>
-                            <li><i class="fas fa-check"></i> Custom music selection</li>
+                            <li><i class="fas fa-check"></i> Licensed Music</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button primary">Book Now</a>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button primary" target="_blank">Book Now</a>
                     </div>
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>Luxury Video</h3>
-                            <p class="price">$1,299</p>
+                            <h3>120-Second Video</h3>
+                            <p class="price">$350</p>
                         </div>
                         <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> 2-3 minute cinematic film</li>
+                            <li><i class="fas fa-check"></i> Extended 120-Second Tour</li>
                             <li><i class="fas fa-check"></i> 4K resolution</li>
-                            <li><i class="fas fa-check"></i> Extended drone coverage</li>
-                            <li><i class="fas fa-check"></i> Twilight footage</li>
+                            <li><i class="fas fa-check"></i> Extended Drone Coverage</li>
+                            <li><i class="fas fa-check"></i> Detailed Room Features</li>
+                            <li><i class="fas fa-check"></i> Smooth Gimbal Footage</li>
                             <li><i class="fas fa-check"></i> Advanced color grading</li>
-                            <li><i class="fas fa-check"></i> Custom branding</li>
+                            <li><i class="fas fa-check"></i> Licensed Music</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button">Book Now</a>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button" target="_blank">Book Now</a>
                     </div>
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <span class="featured-label">Best Value</span>
+                            <h3>Social Bundle</h3>
+                            <p class="price">$425</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 60-Second Cinematic Video</li>
+                            <li><i class="fas fa-check"></i> Vertical Social Media Reel</li>
+                            <li><i class="fas fa-check"></i> Extended Drone Coverage</li>
+                            <li><i class="fas fa-check"></i> Multi-Platform Optimization</li>
+                            <li><i class="fas fa-check"></i> Professional Color Grading</li>
+                            <li><i class="fas fa-check"></i> Licensed Music</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
+                            <li><i class="fas fa-check"></i> $75 in Savings</li>
+                        </ul>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button" target="_blank">Book Now</a>
+                    </div>
+                </div>
+                <div class="package-note" style="text-align: center; margin-top: 2rem; color: var(--text-color);">
+                    <p>All videos include professional editing, color grading, and licensed music.</p>
+                    <p>Custom video lengths and requirements available upon request.</p>
                 </div>
             </div>
         </div>
@@ -227,12 +272,53 @@
 
     <div class="scroll-progress"></div>
 
-    <button class="floating-contact">
-        <i class="fas fa-comment"></i>
-        <span>Let's Talk</span>
-    </button>
-
     <div class="noise-overlay"></div>
     <script src="../script.js"></script>
+
+    <style>
+    .scroll-top-btn {
+        background-color: var(--accent-color, #0066FF);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: opacity 0.3s;
+    }
+    
+    .scroll-top-btn.visible {
+        display: block;
+    }
+    </style>
+
+    <!-- Add scroll to top button -->
+    <button id="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    const scrollBtn = document.querySelector('#scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    </script>
 </body>
 </html>

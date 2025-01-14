@@ -33,10 +33,10 @@
     <!-- Enhanced Hero Section -->
     <section class="hero-section reveal-fade">
         <div class="hero-content" style="z-index: 2;">
-            <h1 class="title">Professional Floor Plans</h1>
-            <p class="subtitle">Accurate 2D & 3D floor plans for better property visualization</p>
+            <h1 class="title" style="color: var(--primary-color);">Professional Floor Plans</h1>
+            <p class="subtitle" style="color: var(--secondary-color);">Accurate 2D & 3D floor plans for better property visualization</p>
             <div class="cta-links">
-                <a href="#pricing" class="link-styled">View Pricing ></a>
+                <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="link-styled" target="_blank">Book Now ></a>
                 <a href="#contact" class="link-styled">Contact Us ></a>
             </div>
         </div>
@@ -212,12 +212,53 @@
 
     <div class="scroll-progress"></div>
 
-    <button class="floating-contact">
-        <i class="fas fa-comment"></i>
-        <span>Let's Talk</span>
-    </button>
-
     <div class="noise-overlay"></div>
     <script src="../script.js"></script>
+
+    <style>
+    .scroll-top-btn {
+        background-color: var(--accent-color, #0066FF);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: opacity 0.3s;
+    }
+    
+    .scroll-top-btn.visible {
+        display: block;
+    }
+    </style>
+
+    <!-- Add scroll to top button -->
+    <button id="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    const scrollBtn = document.querySelector('#scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    </script>
 </body>
 </html> 

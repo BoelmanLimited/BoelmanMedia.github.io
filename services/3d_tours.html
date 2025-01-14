@@ -30,13 +30,13 @@
         </div>
     </nav>
 
-    <!-- Enhanced Hero Section -->
+    <!-- Hero Section -->
     <section class="hero-section reveal-fade">
         <div class="hero-content" style="z-index: 2;">
-            <h1 class="title">3D Virtual Tours</h1>
-            <p class="subtitle">Immersive Matterport tours that bring properties to life</p>
+            <h1 class="title" style="color: var(--primary-color);">3D Virtual Tours</h1>
+            <p class="subtitle" style="color: var(--secondary-color);">Immersive Matterport tours that bring properties to life</p>
             <div class="cta-links">
-                <a href="#pricing" class="link-styled">View Pricing ></a>
+                <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="link-styled" target="_blank">Book Now ></a>
                 <a href="#contact" class="link-styled">Contact Us ></a>
             </div>
         </div>
@@ -95,56 +95,113 @@
         </div>
     </section>
 
-    <!-- Enhanced Pricing Section -->
-    <section id="pricing" class="pricing-section reveal-scale">
+    <!-- Packages Section -->
+    <section class="pricing-section reveal-scale">
         <div class="section-content">
-            <h2 class="section-title">3D Tour Packages</h2>
-            <p class="section-subtitle">Choose your perfect virtual tour package</p>
+            <h2 class="section-title">3D Tour Pricing</h2>
+            <p class="section-subtitle">Professional 3D virtual tours tailored to your property size</p>
             <div class="pricing-plans">
+                <style>
+                .pricing-cards {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+                
+                .pricing-card {
+                    min-width: 250px;
+                }
+                
+                @media (max-width: 1200px) {
+                    .pricing-cards {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .pricing-cards {
+                        grid-template-columns: 1fr;
+                        max-width: 400px;
+                    }
+                }
+                </style>
                 <div class="pricing-cards">
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>Basic 3D Tour</h3>
-                            <p class="price">$299</p>
+                            <h3>Small Property</h3>
+                            <p class="price">$95</p>
                         </div>
                         <ul class="pricing-features">
                             <li><i class="fas fa-check"></i> Up to 2,000 sq ft</li>
-                            <li><i class="fas fa-check"></i> Matterport 3D tour</li>
-                            <li><i class="fas fa-check"></i> Dollhouse view</li>
-                            <li><i class="fas fa-check"></i> 48-hour delivery</li>
+                            <li><i class="fas fa-check"></i> Immersive 3D Walkthrough</li>
+                            <li><i class="fas fa-check"></i> Dollhouse View</li>
+                            <li><i class="fas fa-check"></i> Floor Plan Generation</li>
+                            <li><i class="fas fa-check"></i> Virtual Measurements</li>
+                            <li><i class="fas fa-check"></i> Guided Tour Creation</li>
+                            <li><i class="fas fa-check"></i> Mobile-Friendly Viewing</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button">Book Now</a>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button" target="_blank">Book Now</a>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Medium Property</h3>
+                            <p class="price">$145</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 2,001 - 3,000 sq ft</li>
+                            <li><i class="fas fa-check"></i> Immersive 3D Walkthrough</li>
+                            <li><i class="fas fa-check"></i> Dollhouse View</li>
+                            <li><i class="fas fa-check"></i> Floor Plan Generation</li>
+                            <li><i class="fas fa-check"></i> Virtual Measurements</li>
+                            <li><i class="fas fa-check"></i> Guided Tour Creation</li>
+                            <li><i class="fas fa-check"></i> Mobile-Friendly Viewing</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
+                        </ul>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button" target="_blank">Book Now</a>
                     </div>
                     <div class="pricing-card featured">
                         <div class="pricing-header">
                             <span class="featured-label">Most Popular</span>
-                            <h3>Premium 3D Tour</h3>
-                            <p class="price">$499</p>
+                            <h3>Large Property</h3>
+                            <p class="price">$195</p>
                         </div>
                         <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> Up to 4,000 sq ft</li>
-                            <li><i class="fas fa-check"></i> Matterport 3D tour</li>
-                            <li><i class="fas fa-check"></i> Dollhouse view</li>
-                            <li><i class="fas fa-check"></i> Floor plan included</li>
-                            <li><i class="fas fa-check"></i> 24-hour delivery</li>
+                            <li><i class="fas fa-check"></i> 3,001 - 4,000 sq ft</li>
+                            <li><i class="fas fa-check"></i> Immersive 3D Walkthrough</li>
+                            <li><i class="fas fa-check"></i> Dollhouse View</li>
+                            <li><i class="fas fa-check"></i> Floor Plan Generation</li>
+                            <li><i class="fas fa-check"></i> Virtual Measurements</li>
+                            <li><i class="fas fa-check"></i> Guided Tour Creation</li>
+                            <li><i class="fas fa-check"></i> Mobile-Friendly Viewing</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button primary">Book Now</a>
+                        <a href="https://order.boelmanmedia.com/order/boelman/book-now" class="cta-button primary" target="_blank">Book Now</a>
                     </div>
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>Luxury 3D Tour</h3>
-                            <p class="price">$799</p>
+                            <h3>Extra Large</h3>
+                            <p class="price">Contact Us</p>
                         </div>
                         <ul class="pricing-features">
-                            <li><i class="fas fa-check"></i> Up to 8,000 sq ft</li>
-                            <li><i class="fas fa-check"></i> Matterport 3D tour</li>
-                            <li><i class="fas fa-check"></i> Dollhouse view</li>
-                            <li><i class="fas fa-check"></i> Floor plan included</li>
-                            <li><i class="fas fa-check"></i> Guided tour tags</li>
-                            <li><i class="fas fa-check"></i> Same-day delivery</li>
+                            <li><i class="fas fa-check"></i> 4,001+ sq ft</li>
+                            <li><i class="fas fa-check"></i> Custom Pricing</li>
+                            <li><i class="fas fa-check"></i> All Standard Features</li>
+                            <li><i class="fas fa-check"></i> Extended Coverage</li>
+                            <li><i class="fas fa-check"></i> Priority Service</li>
+                            <li><i class="fas fa-check"></i> Custom Requirements</li>
+                            <li><i class="fas fa-check"></i> Flexible Scheduling</li>
+                            <li><i class="fas fa-check"></i> Next-Day Delivery</li>
                         </ul>
-                        <a href="#contact" class="cta-button">Book Now</a>
+                        <a href="#contact" class="cta-button">Contact Us</a>
                     </div>
+                </div>
+                <div class="package-note" style="text-align: center; margin-top: 2rem; color: var(--text-color);">
+                    <p>All tours include professional scanning and unlimited hosting.</p>
+                    <p>Pricing based on total square footage of the property.</p>
+                    <p>Custom solutions available for unique properties and special requirements.</p>
                 </div>
             </div>
         </div>
@@ -212,12 +269,53 @@
 
     <div class="scroll-progress"></div>
 
-    <button class="floating-contact">
-        <i class="fas fa-comment"></i>
-        <span>Let's Talk</span>
-    </button>
-
     <div class="noise-overlay"></div>
     <script src="../script.js"></script>
+
+    <style>
+    .scroll-top-btn {
+        background-color: var(--accent-color, #0066FF);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: opacity 0.3s;
+    }
+    
+    .scroll-top-btn.visible {
+        display: block;
+    }
+    </style>
+
+    <!-- Add scroll to top button -->
+    <button id="scrollToTop" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    const scrollBtn = document.querySelector('#scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    </script>
 </body>
 </html> 
