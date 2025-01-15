@@ -105,7 +105,41 @@
         <div class="meet-container">
             <div class="meet-content">
                 <div class="meet-image">
-                    <img data-src="../../assets/images/andrew-new.jpg" alt="Andrew Boelman" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+                    <div class="profile-frame" style="
+                        position: relative;
+                        width: 380px;
+                        height: 900px;
+                        margin: 0 auto;
+                        border-radius: 40px;
+                        overflow: hidden;
+                        box-shadow: 
+                            0 50px 100px rgba(0,0,0,0.15),
+                            0 0 0 1px rgba(255,255,255,0.1);
+                        background: linear-gradient(180deg, #f2f2f7 0%, #e5e5ea 100%);
+                    ">
+                        <img src="assets/Photos/067AE9F7-9679-40BA-BEE9-81C0872D3DB6.jpeg" 
+                            alt="Andrew Boelman" 
+                            style="
+                                width: 110%;
+                                height: 110%;
+                                object-fit: contain;
+                                object-position: center 10%;
+                                transition: transform 0.5s ease;
+                                transform: scale(1.2);
+                            "
+                            onmouseover="this.style.transform='scale(1.23)'"
+                            onmouseout="this.style.transform='scale(1.2)'">
+                        <div class="frame-overlay" style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 40px;
+                            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+                            pointer-events: none;
+                        "></div>
+                    </div>
                 </div>
                 <div class="meet-text">
                     <p class="meet-intro">Hi, I'm Andrew Boelman, a professional real estate photographer based in Central Iowa.</p>
@@ -117,6 +151,31 @@
                 </div>
             </div>
         </div>
+        <style>
+        .meet-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .meet-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .profile-frame {
+                width: 280px !important;
+                height: 700px !important;
+                margin-bottom: 2rem;
+            }
+        }
+        </style>
     </section>
 
     <!-- Why Professional Photos Matter Section -->
@@ -395,6 +454,133 @@
 
     .scroll-top-btn.visible {
         display: block;
+    }
+
+    .about-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+
+    .about-text {
+        max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+        .about-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .profile-image {
+            margin-right: 0 !important;
+            margin-bottom: 2rem;
+        }
+    }
+
+    /* Mobile Navigation Optimization */
+    @media (max-width: 768px) {
+        .nav-content ul.list-styled {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .nav-content .logo-container {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Services Grid - 2 columns on mobile */
+        .grid-section {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .grid-item {
+            padding: 1.5rem 1rem;
+        }
+        
+        /* Stats Grid - 2x2 on mobile */
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        /* Reasons Grid - 2 columns on mobile */
+        .reasons-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        /* Reduce section padding on mobile */
+        .services-section,
+        .why-photos-section,
+        .resources-section,
+        .blog-section {
+            padding: 3rem 0;
+        }
+        
+        /* Optimize resource cards */
+        .resources-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .resource-card {
+            padding: 1.5rem 1rem;
+        }
+        
+        /* Optimize spacing */
+        .section-title {
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        /* Contact section optimization */
+        .contact-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        
+        /* Footer optimization */
+        .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 2rem 1rem;
+        }
+    }
+    
+    /* Small mobile optimization */
+    @media (max-width: 480px) {
+        .grid-section,
+        .stats-grid,
+        .reasons-grid,
+        .resources-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .nav-content ul.list-styled {
+            gap: 0.25rem;
+        }
+        
+        .nav-content .link-styled {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
     }
     </style>
 
